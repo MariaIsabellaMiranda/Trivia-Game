@@ -11,7 +11,7 @@ class App extends React.Component {
       <>
         <div>App</div>
         <Switch>
-          <Route exact path="/" component={ Login } />
+          <Route exact path="/" render={ (props) => <Login { ...props } /> } />
           <Route path="/game" component={ Game } />
         </Switch>
       </>
