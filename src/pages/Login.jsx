@@ -1,5 +1,6 @@
 import React from 'react';
-import Header from '../components/Header';
+import propTypes from 'prop-types';
+import saveTokenToLocalStorage from '../helpers/localStorageFunc';
 
 class Login extends React.Component {
   constructor() {
@@ -8,6 +9,15 @@ class Login extends React.Component {
       name: '',
       mail: '',
     };
+  }
+
+  getGameTokenAndRedicect = async () => {
+    // console.log('cliquei e foi?');
+    const { history } = this.props;
+    const APIResult = await fetch('https://opentdb.com/api_token.php?command=request');
+    const ApiData = await APIResult.json();
+    saveTokenToLocalStorage(ApiData.token);
+    history.push('/game');
   }
 
   handleInputChange = ({ target }) => {
@@ -22,9 +32,9 @@ class Login extends React.Component {
 
   render() {
     const { name, mail } = this.state;
+    const { history } = this.props;
     return (
       <section>
-        <Header />
         <label htmlFor="name">
           <input
             id="name"
@@ -47,13 +57,25 @@ class Login extends React.Component {
           type="button"
           data-testid="btn-play"
           disabled={ this.validateButton() }
+          onClick={ () => this.getGameTokenAndRedicect() }
         >
           Play
 
+        </button>
+        <button
+          type="button"
+          data-testid="btn-settings"
+          onClick={ () => { history.push('/settings'); } }
+        >
+          Settings
         </button>
       </section>
     );
   }
 }
+
+Login.propTypes = {
+  history: propTypes.shape().isRequired,
+};
 
 export default Login;
