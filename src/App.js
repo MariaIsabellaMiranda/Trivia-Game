@@ -7,9 +7,12 @@ import './App.css';
 
 export default function App() {
   return (
-    <Switch>
-      <Route exact path="/" component={ Login } />
-      <Route path="/game" component={ Game } />
-    </Switch>
+    <>
+      <div>App</div>
+      <Switch>
+        <Route exact path="/" component={ Login } />
+        <Route path="/game" component={ Game } />
+      </Switch>
+    </>
   );
 }
