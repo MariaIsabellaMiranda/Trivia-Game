@@ -12,9 +12,9 @@ class Feedback extends React.Component {
         <h2>Feedback Page</h2>
         {
           assertions.length >= MIN_ASSERTIONS ? (
-            <p data-testid="feedback-text">Could be better...</p>
-          ) : (
             <p data-testid="feedback-text">Well Done!</p>
+          ) : (
+            <p data-testid="feedback-text">Could be better...</p>
           )
         }
       </div>
