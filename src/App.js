@@ -5,14 +5,18 @@ import Login from './pages/Login';
 import Game from './pages/Game';
 import './App.css';
 
-export default function App() {
-  return (
-    <>
-      <div>App</div>
-      <Switch>
-        <Route exact path="/" component={ Login } />
-        <Route path="/game" component={ Game } />
-      </Switch>
-    </>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <>
+        <div>App</div>
+        <Switch>
+          <Route exact path="/" component={ Login } />
+          <Route path="/game" component={ Game } />
+        </Switch>
+      </>
+    );
+  }
 }
+
+export default App;
