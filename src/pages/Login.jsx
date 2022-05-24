@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from '../components/Header';
 
 class Login extends React.Component {
   constructor() {
@@ -23,6 +24,7 @@ class Login extends React.Component {
     const { name, mail } = this.state;
     return (
       <section>
+        <Header />
         <label htmlFor="name">
           <input
             id="name"

@@ -1,8 +1,14 @@
 import React from 'react';
+import Header from '../components/Header';
 
 class Game extends React.Component {
   render() {
-    return <div>Página de game, irmão</div>;
+    return (
+      <div>
+        <Header />
+        Página de game, irmão
+      </div>
+    );
   }
 }
 
