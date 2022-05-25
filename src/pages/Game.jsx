@@ -7,7 +7,7 @@ import {
   removeTokenLocalStorage,
 } from '../helpers/localStorageFunc';
 import Header from '../components/Header';
-import { updateAssertions } from '../Redux/Actions';
+import { updateAssertions, updateScore } from '../Redux/Actions';
 
 class Game extends React.Component {
   constructor() {
@@ -71,6 +71,24 @@ class Game extends React.Component {
     clearInterval(intervalID);
   }
 
+  scoreCalculator=(difficulty) => {
+    const extra = 10;
+    const hard = 3;
+    const medium = 2;
+    const easy = 1;
+    const { timer } = this.state;
+    const { scoreUp } = this.props;
+    let score = 0;
+    if (difficulty === 'hard') {
+      score = timer * hard + extra;
+    } else if (difficulty === 'medium') {
+      score = timer * medium + extra;
+    } else {
+      score = timer * easy + extra;
+    }
+    scoreUp(score);
+  }
+
   handleClick = ({ target }) => {
     this.changeButtonColor();
     this.rightAnswer(target);
@@ -80,8 +98,10 @@ class Game extends React.Component {
   rightAnswer = (target) => {
     const { assertionUp } = this.props;
     if (target.getAttribute('data-testid') === 'correct-answer') {
-      console.log('algo aconteceu');
       assertionUp();
+      this.stopTimer();
+      const { questionResults, indexQuestion } = this.state;
+      this.scoreCalculator(questionResults[indexQuestion].difficulty);
     }
     this.setState({ isDisabled: true });
   }
@@ -173,11 +193,13 @@ class Game extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   assertionUp: () => dispatch(updateAssertions()),
+  scoreUp: (score) => dispatch(updateScore(score)),
 });
 
 Game.propTypes = {
   history: propTypes.shape().isRequired,
   assertionUp: propTypes.func.isRequired,
+  scoreUp: propTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Game);
