@@ -1,6 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 import saveTokenToLocalStorage from '../helpers/localStorageFunc';
+import { saveLoginInfo } from '../Redux/Actions';
 
 class Login extends React.Component {
   constructor() {
@@ -32,6 +34,7 @@ class Login extends React.Component {
 
   render() {
     const { name, mail } = this.state;
+    const { history, savePlayerInfo } = this.props;
     return (
       <section>
         <label htmlFor="name">
@@ -56,18 +59,34 @@ class Login extends React.Component {
           type="button"
           data-testid="btn-play"
           disabled={ this.validateButton() }
-          onClick={ () => this.getGameTokenAndRedicect() }
+          onClick={ () => {
+            this.getGameTokenAndRedicect();
+            savePlayerInfo(name, mail);
+          } }
         >
           Play
 
+        </button>
+        <button
+          type="button"
+          data-testid="btn-settings"
+          onClick={ () => { history.push('/settings'); } }
+        >
+          Settings
         </button>
       </section>
     );
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  savePlayerInfo: (name, email) => dispatch(saveLoginInfo(name, email)),
+});
+
 Login.propTypes = {
   history: propTypes.shape().isRequired,
+  savePlayerInfo: propTypes.func.isRequired,
 };
 
-export default Login;
+// export default Login;
+export default connect(null, mapDispatchToProps)(Login);
