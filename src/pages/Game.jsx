@@ -1,11 +1,13 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 import '../style/Game.css';
 import {
   getTokenLocalStorage,
   removeTokenLocalStorage,
 } from '../helpers/localStorageFunc';
 import Header from '../components/Header';
+import { updateAssertions } from '../Redux/Actions';
 
 class Game extends React.Component {
   constructor() {
@@ -16,6 +18,9 @@ class Game extends React.Component {
       code: '',
       questionResults: [],
       classNames: ['', ''],
+      isDisabled: false,
+      timer: 30,
+      timeRanOut: false,
     };
   }
 
@@ -37,6 +42,7 @@ class Game extends React.Component {
     } catch (e) {
       console.error(e);
     }
+    this.timer();
   }
 
   handleTokenInvalid = () => {
@@ -45,8 +51,39 @@ class Game extends React.Component {
     history.push('/');
   }
 
-  handleClick = () => {
+  timerFunction = () => {
+    this.setState((prevState) => {
+      if (prevState.timer === 0) {
+        return ({ isDisabled: true, timeRanOut: true });
+      }
+      return ({ timer: prevState.timer - 1 });
+    });
+  }
+
+  timer = () => {
+    const oneSec = 1000;
+    const gameTimer = setInterval(this.timerFunction, oneSec);
+    this.setState({ intervalID: gameTimer });
+  }
+
+  stopTimer = () => {
+    const { intervalID } = this.state;
+    clearInterval(intervalID);
+  }
+
+  handleClick = ({ target }) => {
     this.changeButtonColor();
+    this.rightAnswer(target);
+    this.stopTimer();
+  }
+
+  rightAnswer = (target) => {
+    const { assertionUp } = this.props;
+    if (target.getAttribute('data-testid') === 'correct-answer') {
+      console.log('algo aconteceu');
+      assertionUp();
+    }
+    this.setState({ isDisabled: true });
   }
 
   changeButtonColor = () => {
@@ -73,11 +110,16 @@ class Game extends React.Component {
       indexQuestion,
       questionsAlternatives,
       code, questionResults,
-      classNames } = this.state;
+      classNames,
+      isDisabled,
+      timer,
+      timeRanOut,
+    } = this.state;
     const number3 = 3;
     return (
       <>
         <Header />
+        { timeRanOut && this.stopTimer() }
         <div>
           { code === number3 ? (
             this.handleTokenInvalid()
@@ -86,6 +128,7 @@ class Game extends React.Component {
               <div>
                 {questionResults.length > 0 && (
                   <div>
+                    <div>{ timer }</div>
                     <h2
                       data-testid="question-category"
                     >
@@ -106,6 +149,7 @@ class Game extends React.Component {
                               ? classNames[0] : classNames[1]
                           }
                           type="button"
+                          disabled={ isDisabled }
                           onClick={ this.handleClick }
                           data-testid={
                             answers === questionResults[indexQuestion].correct_answer
@@ -127,8 +171,13 @@ class Game extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  assertionUp: () => dispatch(updateAssertions()),
+});
+
 Game.propTypes = {
   history: propTypes.shape().isRequired,
+  assertionUp: propTypes.func.isRequired,
 };
 
-export default Game;
+export default connect(null, mapDispatchToProps)(Game);
