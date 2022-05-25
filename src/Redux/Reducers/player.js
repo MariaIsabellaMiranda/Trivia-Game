@@ -1,20 +1,16 @@
+import { SAVE_LOGIN_INFO } from '../Actions';
+
 const INITIAL_STATE = {
   name: '',
   assertions: '',
   score: 0,
   gravatarEmail: '',
-  responseCode: 0,
-  questionResults: [],
 };
 
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case 'CHANGE_QUESTIONS':
-    return {
-      ...state,
-      responseCode: action.code,
-      questionResults: action.results,
-    };
+  case SAVE_LOGIN_INFO:
+    return { ...state, name: action.payload.name, gravatarEmail: action.payload.email };
   default:
     return state;
   }

@@ -4,6 +4,7 @@ import {
   getTokenLocalStorage,
   removeTokenLocalStorage,
 } from '../helpers/localStorageFunc';
+import Header from '../components/Header';
 
 class Game extends React.Component {
   constructor() {
@@ -59,45 +60,48 @@ class Game extends React.Component {
     const { indexQuestion, questionsAlternatives, code, questionResults } = this.state;
     const number3 = 3;
     return (
-      <div>
-        { code === number3 ? (
-          this.handleTokenInvalid()
-        )
-          : (
-            <div>
-              {questionResults.length > 0 && (
-                <div>
-                  <h2
-                    data-testid="question-category"
-                  >
-                    {questionResults[indexQuestion].category}
+      <>
+        <Header />
+        <div>
+          { code === number3 ? (
+            this.handleTokenInvalid()
+          )
+            : (
+              <div>
+                {questionResults.length > 0 && (
+                  <div>
+                    <h2
+                      data-testid="question-category"
+                    >
+                      {questionResults[indexQuestion].category}
 
-                  </h2>
-                  <h3
-                    data-testid="question-text"
-                  >
-                    {questionResults[indexQuestion].question}
+                    </h2>
+                    <h3
+                      data-testid="question-text"
+                    >
+                      {questionResults[indexQuestion].question}
 
-                  </h3>
-                  <section data-testid="answer-options">
-                    { questionsAlternatives[indexQuestion].map((answers, index) => (
-                      <button
-                        type="button"
-                        data-testid={
-                          answers === questionResults[indexQuestion].correct_answer
-                            ? 'correct-answer' : `wrong-answer-${index}`
-                        }
-                        key={ index }
-                      >
-                        {answers}
-                      </button>)) }
+                    </h3>
+                    <section data-testid="answer-options">
+                      { questionsAlternatives[indexQuestion].map((answers, index) => (
+                        <button
+                          type="button"
+                          data-testid={
+                            answers === questionResults[indexQuestion].correct_answer
+                              ? 'correct-answer' : `wrong-answer-${index}`
+                          }
+                          key={ index }
+                        >
+                          {answers}
+                        </button>)) }
 
-                  </section>
-                </div>
-              )}
-            </div>
-          )}
-      </div>
+                    </section>
+                  </div>
+                )}
+              </div>
+            )}
+        </div>
+      </>
     );
   }
 }
