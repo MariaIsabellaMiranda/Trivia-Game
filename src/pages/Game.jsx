@@ -1,25 +1,39 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import {
   getTokenLocalStorage,
   removeTokenLocalStorage,
 } from '../helpers/localStorageFunc';
-import { getQuestions } from '../Redux/Actions';
 
 class Game extends React.Component {
   constructor() {
     super();
     this.state = {
       indexQuestion: 0,
+      questionsAlternatives: [],
+      code: '',
+      questionResults: [],
     };
   }
 
-  componentDidMount() {
-    const { fetchApiQuestions } = this.props;
+  async componentDidMount() {
+    const number05 = 0.5;
+    const number1 = -1;
     const token = getTokenLocalStorage();
-    console.log(token);
-    fetchApiQuestions(token);
+    try {
+      const response = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
+      const result = await response.json();
+      this.setState({
+        code: result.response_code,
+        questionResults: result.results,
+        questionsAlternatives: result.results
+          .map(({ correct_answer: correct, incorrect_answers: incorrect }) => ([
+            ...incorrect, correct,
+          ].sort(() => ((Math.random() > number05) ? 1 : number1)))),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   handleTokenInvalid = () => {
@@ -28,59 +42,55 @@ class Game extends React.Component {
     history.push('/');
   }
 
-  updateQuestion = () => {
-    const { indexQuestion } = this.state;
-    const { question } = this.props;
-    const { results } = question;
-    if (indexQuestion !== results.length - 1) {
-      this.setState((prevState) => ({
-        indexQuestion: prevState.indexQuestion + 1,
-      }));
-    } else {
-      this.setState({ indexQuestion: 0 });
-    }
-  }
+  // nextQuestion = () => {
+  //   const { indexQuestion } = this.state;
+  //   const { question } = this.props;
+  //   const { results } = question;
+  //   if (indexQuestion !== results.length - 1) {
+  //     this.setState((prevState) => ({
+  //       indexQuestion: prevState.indexQuestion + 1,
+  //     }));
+  //   } else {
+  //     history.push('/feedback');
+  //   }
+  // }
 
   render() {
-    const { indexQuestion } = this.state;
-    const { question } = this.props;
-    const { results } = question;
+    const { indexQuestion, questionsAlternatives, code, questionResults } = this.state;
     const number3 = 3;
     return (
       <div>
-        { question.response_code === number3 ? (
+        { code === number3 ? (
           this.handleTokenInvalid()
         )
           : (
             <div>
-              {results && (
+              {questionResults.length > 0 && (
                 <div>
                   <h2
                     data-testid="question-category"
                   >
-                    {results[indexQuestion].category}
+                    {questionResults[indexQuestion].category}
 
                   </h2>
-                  <h3 data-testid="question-text">{results[indexQuestion].question}</h3>
-                  <section data-testid="answer-options">
-                    <button
-                      type="button"
-                      data-testid="correct-answer"
-                      onClick={ this.updateQuestion }
-                    >
-                      {results[indexQuestion].correct_answer}
+                  <h3
+                    data-testid="question-text"
+                  >
+                    {questionResults[indexQuestion].question}
 
-                    </button>
-                    { results[indexQuestion].incorrect_answers
-                      .map((answers, index) => (
-                        <button
-                          type="button"
-                          data-testid={ `wrong-answer-${index}` }
-                          key={ index }
-                          onClick={ this.updateQuestion }
-                        >
-                          {answers}
-                        </button>)) }
+                  </h3>
+                  <section data-testid="answer-options">
+                    { questionsAlternatives[indexQuestion].map((answers, index) => (
+                      <button
+                        type="button"
+                        data-testid={
+                          answers === questionResults[indexQuestion].correct_answer
+                            ? 'correct-answer' : `wrong-answer-${index}`
+                        }
+                        key={ index }
+                      >
+                        {answers}
+                      </button>)) }
 
                   </section>
                 </div>
@@ -93,17 +103,7 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
-  fetchApiQuestions: propTypes.func.isRequired,
-  question: propTypes.shape().isRequired,
   history: propTypes.shape().isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  question: state.player.questions,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  fetchApiQuestions: (token) => dispatch(getQuestions(token)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default Game;

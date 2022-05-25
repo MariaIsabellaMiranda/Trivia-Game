@@ -3,7 +3,8 @@ const INITIAL_STATE = {
   assertions: '',
   score: 0,
   gravatarEmail: '',
-  questions: {},
+  responseCode: 0,
+  questionResults: [],
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -11,7 +12,8 @@ const player = (state = INITIAL_STATE, action) => {
   case 'CHANGE_QUESTIONS':
     return {
       ...state,
-      questions: action.questions,
+      responseCode: action.code,
+      questionResults: action.results,
     };
   default:
     return state;
