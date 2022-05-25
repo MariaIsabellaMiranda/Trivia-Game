@@ -1,6 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Header from '../components/Header';
 
 const MIN_ASSERTIONS = 3;
 
@@ -14,6 +15,7 @@ class Feedback extends React.Component {
     const { assertions, score } = this.props;
     return (
       <div>
+        <Header />
         <h2>Feedback Page</h2>
         {
           assertions.length >= MIN_ASSERTIONS ? (
