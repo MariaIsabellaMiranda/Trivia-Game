@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import saveTokenToLocalStorage from '../helpers/localStorageFunc';
+import { saveTokenToLocalStorage } from '../helpers/localStorageFunc';
 import { saveLoginInfo } from '../Redux/Actions';
 
 class Login extends React.Component {
@@ -14,7 +14,6 @@ class Login extends React.Component {
   }
 
   getGameTokenAndRedicect = async () => {
-    // console.log('cliquei e foi?');
     const { history } = this.props;
     const APIResult = await fetch('https://opentdb.com/api_token.php?command=request');
     const ApiData = await APIResult.json();

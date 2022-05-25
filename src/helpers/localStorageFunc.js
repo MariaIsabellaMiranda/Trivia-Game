@@ -1,5 +1,11 @@
-function saveTokenToLocalStorage(gameToken) {
+export function saveTokenToLocalStorage(gameToken) {
   localStorage.setItem('token', gameToken);
 }
 
-export default saveTokenToLocalStorage;
+export function getTokenLocalStorage() {
+  return localStorage.getItem('token');
+}
+
+export function removeTokenLocalStorage() {
+  return localStorage.removeItem('token');
+}
