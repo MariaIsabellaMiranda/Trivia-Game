@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import '../style/Game.css';
 import {
   getTokenLocalStorage,
   removeTokenLocalStorage,
@@ -14,6 +15,7 @@ class Game extends React.Component {
       questionsAlternatives: [],
       code: '',
       questionResults: [],
+      classNames: ['', ''],
     };
   }
 
@@ -43,6 +45,16 @@ class Game extends React.Component {
     history.push('/');
   }
 
+  handleClick = () => {
+    this.changeButtonColor();
+  }
+
+  changeButtonColor = () => {
+    this.setState({
+      classNames: ['correct', 'wrong'],
+    });
+  }
+
   // nextQuestion = () => {
   //   const { indexQuestion } = this.state;
   //   const { question } = this.props;
@@ -57,7 +69,11 @@ class Game extends React.Component {
   // }
 
   render() {
-    const { indexQuestion, questionsAlternatives, code, questionResults } = this.state;
+    const {
+      indexQuestion,
+      questionsAlternatives,
+      code, questionResults,
+      classNames } = this.state;
     const number3 = 3;
     return (
       <>
@@ -85,7 +101,12 @@ class Game extends React.Component {
                     <section data-testid="answer-options">
                       { questionsAlternatives[indexQuestion].map((answers, index) => (
                         <button
+                          className={
+                            answers === questionResults[indexQuestion].correct_answer
+                              ? classNames[0] : classNames[1]
+                          }
                           type="button"
+                          onClick={ this.handleClick }
                           data-testid={
                             answers === questionResults[indexQuestion].correct_answer
                               ? 'correct-answer' : `wrong-answer-${index}`
