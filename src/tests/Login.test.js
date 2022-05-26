@@ -15,9 +15,15 @@ describe('Testa as funcionalidades da tela de Login', () => {
 
   });
 
-  // it('Verifica a existência de dois inputs na tela de login', () => {
+  it('Verifica a existência de dois inputs na tela de login', () => {
+    const { debug } = renderWithRouterAndRedux(<App />);
 
-  // });
+    const loginInputs = screen.getAllByRole('textbox');
+
+    expect(loginInputs).toHaveLength(2);
+    expect(loginInputs[0]).toBeInTheDocument();
+    expect(loginInputs[1]).toBeInTheDocument();
+  });
 
   // it('Verifica a existência de botão um botão com texto "Play"', () => {
 
