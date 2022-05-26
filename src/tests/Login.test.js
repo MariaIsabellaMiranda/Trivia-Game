@@ -25,18 +25,22 @@ describe('Testa as funcionalidades da tela de Login', () => {
     expect(loginInputs[1]).toBeInTheDocument();
   });
 
-  // it('Verifica a existência de botão um botão com texto "Play"', () => {
-
-  // });
-
   // it('Verifica a existência de um botão com texto "Settings"', () => {
-
-  // });
-  
+    
+    // });
+    
   // it('Verifica se, ao clicar no botão "Settings", a página é redirecionada para "/settings"', () => {
+    
+    // });
+      
+  it('Verifica a existência de botão um botão com texto "Play"', () => {
+    const { debug } = renderWithRouterAndRedux(<App />);
 
-  // });
-
+    const playButton = screen.getByRole('button', { name: 'Play' });
+    
+    expect(playButton).toBeInTheDocument();
+  });
+  
   // it('Verifica se o botão "Play" está desabilitado enquanto os inputs estão vazios', () => {
 
   // });
