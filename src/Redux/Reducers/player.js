@@ -14,7 +14,7 @@ const player = (state = INITIAL_STATE, action) => {
   case SAVE_LOGIN_INFO:
     return { ...state, name: action.payload.name, gravatarEmail: action.payload.email };
   case UPDATE_SCORE:
-    return { ...state, score: action.payload };
+    return { ...state, score: (state.score + action.payload) };
   default:
     return state;
   }

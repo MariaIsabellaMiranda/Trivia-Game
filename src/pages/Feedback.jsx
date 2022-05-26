@@ -3,8 +3,6 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 
-const MIN_ASSERTIONS = 3;
-
 class Feedback extends React.Component {
   redirectToLogin = () => {
     const { history } = this.props;
@@ -13,12 +11,13 @@ class Feedback extends React.Component {
 
   render() {
     const { assertions, score } = this.props;
+    const MIN_ASSERTIONS = 3;
     return (
       <div>
         <Header />
         <h2>Feedback Page</h2>
         {
-          assertions.length >= MIN_ASSERTIONS ? (
+          assertions >= MIN_ASSERTIONS ? (
             <p data-testid="feedback-text">Well Done!</p>
           ) : (
             <p data-testid="feedback-text">Could be better...</p>

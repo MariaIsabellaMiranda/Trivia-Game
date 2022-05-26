@@ -21,6 +21,7 @@ class Game extends React.Component {
       isDisabled: false,
       timer: 30,
       timeRanOut: false,
+      renderButtonNext: false,
     };
   }
 
@@ -93,6 +94,7 @@ class Game extends React.Component {
     this.changeButtonColor();
     this.rightAnswer(target);
     this.stopTimer();
+    this.setState({ renderButtonNext: true });
   }
 
   rightAnswer = (target) => {
@@ -112,28 +114,34 @@ class Game extends React.Component {
     });
   }
 
-  // nextQuestion = () => {
-  //   const { indexQuestion } = this.state;
-  //   const { question } = this.props;
-  //   const { results } = question;
-  //   if (indexQuestion !== results.length - 1) {
-  //     this.setState((prevState) => ({
-  //       indexQuestion: prevState.indexQuestion + 1,
-  //     }));
-  //   } else {
-  //     history.push('/feedback');
-  //   }
-  // }
+  nextQuestion = () => {
+    const { indexQuestion, questionResults } = this.state;
+    const { history } = this.props;
+    if (indexQuestion !== questionResults.length - 1) {
+      this.setState((prevState) => ({
+        indexQuestion: prevState.indexQuestion + 1,
+        renderButtonNext: false,
+        classNames: ['', ''],
+        isDisabled: false,
+        timer: 30,
+      }));
+      this.timer();
+    } else {
+      history.push('/feedback');
+    }
+  }
 
   render() {
     const {
       indexQuestion,
       questionsAlternatives,
-      code, questionResults,
+      code,
+      questionResults,
       classNames,
       isDisabled,
       timer,
       timeRanOut,
+      renderButtonNext,
     } = this.state;
     const number3 = 3;
     return (
@@ -179,8 +187,18 @@ class Game extends React.Component {
                         >
                           {answers}
                         </button>)) }
-
                     </section>
+                    {renderButtonNext
+                          && (
+                            <button
+                              type="button"
+                              data-testid="btn-next"
+                              onClick={ this.nextQuestion }
+                            >
+                              Next
+
+                            </button>
+                          )}
                   </div>
                 )}
               </div>
