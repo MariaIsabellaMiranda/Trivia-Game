@@ -57,9 +57,13 @@ describe('Testa as funcionalidades da tela de Login', () => {
     expect(playButton).toBeInTheDocument();
   });
 
-  // it('Verifica se o botão "Play" está desabilitado enquanto os inputs estão vazios', () => {
+  it('Verifica se o botão "Play" está desabilitado enquanto os inputs estão vazios', () => {
+    const { debug } = renderWithRouterAndRedux(<App />);
 
-  // });
+    const playButton = screen.getByRole('button', { name: 'Play' });
+
+    expect(playButton).toBeDisabled();
+  });
 
   // it('Verifica se o botão "Play" está desabilitado enquanto apenas um input é preenchido', () => {
 
