@@ -33,9 +33,21 @@ describe('Testa as funcionalidades da tela de Login', () => {
     expect(settingsButton).toBeInTheDocument();
   });
     
-  // it('Verifica se, ao clicar no botão "Settings", a página é redirecionada para "/settings"', () => {
-    
-  // });
+  it('Verifica se, ao clicar no botão "Settings", a página é redirecionada para "/settings"', () => {
+    const { history, debug } = renderWithRouterAndRedux(<App />);
+    const { location: { pathname } } = history;
+
+    const settingsButton = screen.getByRole('button', { name: 'Settings' });
+
+    expect(pathname).toBe('/');
+    expect(settingsButton).toBeInTheDocument();
+    expect(settingsButton).not.toBeDisabled();
+
+    userEvent.click(settingsButton);
+    // debug();
+
+    expect(history.location.pathname).toBe('/settings');
+  });
       
   it('Verifica a existência de botão um botão com texto "Play"', () => {
     const { debug } = renderWithRouterAndRedux(<App />);
