@@ -25,13 +25,17 @@ describe('Testa as funcionalidades da tela de Login', () => {
     expect(loginInputs[1]).toBeInTheDocument();
   });
 
-  // it('Verifica a existência de um botão com texto "Settings"', () => {
-    
-    // });
+  it('Verifica a existência de um botão com texto "Settings"', () => {
+    const { debug } = renderWithRouterAndRedux(<App />);
+
+    const settingsButton = screen.getByRole('button', { name: 'Settings' });
+
+    expect(settingsButton).toBeInTheDocument();
+  });
     
   // it('Verifica se, ao clicar no botão "Settings", a página é redirecionada para "/settings"', () => {
     
-    // });
+  // });
       
   it('Verifica a existência de botão um botão com texto "Play"', () => {
     const { debug } = renderWithRouterAndRedux(<App />);
@@ -40,7 +44,7 @@ describe('Testa as funcionalidades da tela de Login', () => {
     
     expect(playButton).toBeInTheDocument();
   });
-  
+
   // it('Verifica se o botão "Play" está desabilitado enquanto os inputs estão vazios', () => {
 
   // });
