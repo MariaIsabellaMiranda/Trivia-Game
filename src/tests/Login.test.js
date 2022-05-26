@@ -65,13 +65,35 @@ describe('Testa as funcionalidades da tela de Login', () => {
     expect(playButton).toBeDisabled();
   });
 
-  // it('Verifica se o botão "Play" está desabilitado enquanto apenas um input é preenchido', () => {
+  it('Verifica se o botão "Play" está desabilitado enquanto apenas um input é preenchido', () => {
+    const { debug } = renderWithRouterAndRedux(<App />);
 
-  // });
+    const loginInputs = screen.getAllByRole('textbox');
+    const playButton = screen.getByRole('button', { name: 'Play' });
 
-  // it('Verifica se o botão "Play" é habilitado quando ambos inputs são preenchidos', () => {
+    expect(playButton).toBeDisabled();
 
-  // });
+    userEvent.type(loginInputs[0], 'nome do usuário');
+
+    expect(playButton).toBeDisabled();
+    // debug();
+  });
+
+  it('Verifica se o botão "Play" é habilitado quando ambos inputs são preenchidos', () => {
+    const { debug } = renderWithRouterAndRedux(<App />);
+
+    const loginInputs = screen.getAllByRole('textbox');
+    const playButton = screen.getByRole('button', { name: 'Play' });
+
+    expect(playButton).toBeDisabled();
+
+    userEvent.type(loginInputs[0], 'nome do usuário');
+    expect(playButton).toBeDisabled();
+
+    userEvent.type(loginInputs[1], 'usuario@email.com');
+    expect(playButton).not.toBeDisabled();
+
+  });
 
   // it('Verifica se, ao clicar no botão "Play", a API Trivia é chamada para recuperar um token', () => {
 
