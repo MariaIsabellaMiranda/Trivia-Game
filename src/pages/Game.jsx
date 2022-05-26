@@ -1,10 +1,12 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import md5 from 'crypto-js/md5';
 import '../style/Game.css';
 import {
   getTokenLocalStorage,
   removeTokenLocalStorage,
+  saveRankingToLocalStorage,
 } from '../helpers/localStorageFunc';
 import Header from '../components/Header';
 import { updateAssertions, updateScore } from '../Redux/Actions';
@@ -127,6 +129,16 @@ class Game extends React.Component {
       }));
       this.timer();
     } else {
+      const { name, score, email } = this.props;
+      const hash = md5(email).toString();
+      const url = `https://www.gravatar.com/avatar/${hash}`;
+      const playerObject = {
+        index: 0,
+        name,
+        score,
+        picture: url,
+      };
+      saveRankingToLocalStorage(playerObject);
       history.push('/feedback');
     }
   }
@@ -209,6 +221,13 @@ class Game extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  assertions: state.player.assertions,
+  score: state.player.score,
+  name: state.player.name,
+  email: state.player.email,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   assertionUp: () => dispatch(updateAssertions()),
   scoreUp: (score) => dispatch(updateScore(score)),
@@ -218,6 +237,9 @@ Game.propTypes = {
   history: propTypes.shape().isRequired,
   assertionUp: propTypes.func.isRequired,
   scoreUp: propTypes.func.isRequired,
+  name: propTypes.string.isRequired,
+  email: propTypes.string.isRequired,
+  score: propTypes.number.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(Game);
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
