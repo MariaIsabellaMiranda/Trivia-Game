@@ -1,6 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { waitFor } from '@testing-library/react';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import App from '../App';
 
@@ -95,16 +96,24 @@ describe('Testa as funcionalidades da tela de Login', () => {
 
   });
 
-  // it('Verifica se, ao clicar no botão "Play", a API Trivia é chamada para recuperar um token', () => {
+  it('Verifica se, ao clicar no botão "Play", a página é redirecionada para "/game"', async () => {
+    const { history, debug } = renderWithRouterAndRedux(<App />);
 
-  // });
+    const loginInputs = screen.getAllByRole('textbox');
+    const playButton = screen.getByRole('button', { name: 'Play' });
 
-  // it('Verifica se, ao clicar no botão "Play", o conteúdo digitado nos inputs é salvo no store da aplicação', () => {
+    userEvent.type(loginInputs[0], 'nome do usuário');
+    userEvent.type(loginInputs[1], 'usuario@email.com');
 
-  // });
+    expect(playButton).not.toBeDisabled();
 
-  // it('Verifica se, ao clicar no botão "Play", a página é redirecionada para "/game"', () => {
+    userEvent.click(playButton);
+    debug();
 
-  // });
+    await waitFor(() => {
+      expect(history.location.pathname).toBe('/game');
+    });
+
+  });
 
 });
