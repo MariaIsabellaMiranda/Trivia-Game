@@ -6,7 +6,7 @@ import Header from '../components/Header';
 class Feedback extends React.Component {
   redirectToLogin = () => {
     const { history } = this.props;
-    history.push('/login');
+    history.push('/');
   }
 
   render() {
