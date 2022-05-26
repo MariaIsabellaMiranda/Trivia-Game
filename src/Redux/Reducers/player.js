@@ -1,4 +1,9 @@
-import { SAVE_LOGIN_INFO, UPDATE_ASSERTIONS, UPDATE_SCORE } from '../Actions';
+import {
+  RESTORE_SCORE,
+  SAVE_LOGIN_INFO,
+  UPDATE_ASSERTIONS,
+  UPDATE_SCORE,
+} from '../Actions';
 
 const INITIAL_STATE = {
   name: '',
@@ -15,6 +20,8 @@ const player = (state = INITIAL_STATE, action) => {
     return { ...state, name: action.payload.name, gravatarEmail: action.payload.email };
   case UPDATE_SCORE:
     return { ...state, score: (state.score + action.payload) };
+  case RESTORE_SCORE:
+    return { ...state, score: 0, name: '', gravatarEmail: '', assertions: 0 };
   default:
     return state;
   }

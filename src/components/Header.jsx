@@ -22,6 +22,7 @@ const mapStateToProps = (state) => ({
   score: state.player.score,
   email: state.player.gravatarEmail,
 });
+
 Header.propTypes = {
   name: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,

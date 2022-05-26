@@ -3,10 +3,18 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 
+import { restoreScore } from '../Redux/Actions';
+
 class Feedback extends React.Component {
   redirectToLogin = () => {
-    const { history } = this.props;
+    const { history, scoreRestore } = this.props;
+    scoreRestore();
     history.push('/');
+  }
+
+  redirectToRanking = () => {
+    const { history } = this.props;
+    history.push('/ranking');
   }
 
   render() {
@@ -34,6 +42,13 @@ class Feedback extends React.Component {
         >
           Play Again
         </button>
+        <button
+          type="button"
+          data-testid="btn-ranking"
+          onClick={ this.redirectToRanking }
+        >
+          Ranking
+        </button>
       </div>
     );
   }
@@ -43,11 +58,18 @@ Feedback.propTypes = {
   assertions: propTypes.number.isRequired,
   history: propTypes.shape().isRequired,
   score: propTypes.number.isRequired,
+  scoreRestore: propTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   assertions: state.player.assertions,
   score: state.player.score,
+  name: state.player.name,
+  email: state.player.email,
 });
 
-export default connect(mapStateToProps)(Feedback);
+const mapDispatchToProps = (dispatch) => ({
+  scoreRestore: () => dispatch(restoreScore()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
