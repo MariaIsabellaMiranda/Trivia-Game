@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 
-import { restoreScore } from '../Redux/Actions';
+import { restoreStore } from '../Redux/Actions';
 
 class Feedback extends React.Component {
   redirectToLogin = () => {
@@ -69,7 +69,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  scoreRestore: () => dispatch(restoreScore()),
+  scoreRestore: () => dispatch(restoreStore()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
