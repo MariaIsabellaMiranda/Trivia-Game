@@ -1,5 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { restoreStore } from '../Redux/Actions';
 // import player from '../Redux/Reducers/player';
 
 class Ranking extends React.Component {
@@ -26,7 +28,8 @@ class Ranking extends React.Component {
   }
 
   redirectToLogin = () => {
-    const { history } = this.props;
+    const { history, restoreStoreForNewGame } = this.props;
+    restoreStoreForNewGame();
     history.push('/');
   }
 
@@ -58,8 +61,13 @@ class Ranking extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  restoreStoreForNewGame: () => dispatch(restoreStore()),
+});
+
 Ranking.propTypes = {
   history: propTypes.shape().isRequired,
+  restoreStoreForNewGame: propTypes.func.isRequired,
 };
 
-export default Ranking;
+export default connect(null, mapDispatchToProps)(Ranking);
