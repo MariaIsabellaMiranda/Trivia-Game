@@ -1,5 +1,5 @@
 import {
-  RESTORE_SCORE,
+  RESTORE_STORE,
   SAVE_LOGIN_INFO,
   UPDATE_ASSERTIONS,
   UPDATE_SCORE,
@@ -20,7 +20,7 @@ const player = (state = INITIAL_STATE, action) => {
     return { ...state, name: action.payload.name, gravatarEmail: action.payload.email };
   case UPDATE_SCORE:
     return { ...state, score: (state.score + action.payload) };
-  case RESTORE_SCORE:
+  case RESTORE_STORE:
     return { ...state, score: 0, name: '', gravatarEmail: '', assertions: 0 };
   default:
     return state;
