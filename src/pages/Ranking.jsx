@@ -24,7 +24,6 @@ class Ranking extends React.Component {
       }
       return 0;
     });
-    return play;
   }
 
   redirectToLogin = () => {
@@ -34,7 +33,7 @@ class Ranking extends React.Component {
   }
 
   render() {
-    const players = JSON.parse(localStorage.getItem('ranking'));
+    const players = JSON.parse(localStorage.getItem('ranking')) || [];
     this.sortRanking(players);
     // const { rankingPlayers, sorted } = this.state;
     return (

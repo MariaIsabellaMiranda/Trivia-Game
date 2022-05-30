@@ -96,18 +96,13 @@ describe('Testa as funcionalidades da tela de feedback', () =>{
         expect(rankingButton).toBeInTheDocument();
     }); 
     
-     it('Verifica se ao clicar botão "Ranking" a página e redirecionada para "/ranking" ',async()=>{
-        const {debug,history}=renderWithRouterAndRedux(<App />,stateVersionOne,"/ranking");
+      it('Verifica se ao clicar botão "Ranking" a página e redirecionada para "/ranking" ',async()=>{
+         const {debug,history}=renderWithRouterAndRedux(<App />,stateVersionOne,"/feedback");
         const rankingButton =screen.getByRole('button',{name:/Ranking/i});
         expect(rankingButton).toBeInTheDocument();
-        const mockLocalStorage = jest.spyOn(global,"localStorage.getItem('ranking')").mockReturnValue(JSON.stringify([{
-            index:0,
-            name:'xablau',
-            picture:'teste',
-            score:100,
-        }]));
-        userEvent.click(rankingButton);
-        mockLocalStorage.localStorage.getItem('ranking');
+       
+         userEvent.click(rankingButton);
+        // mockLocalStorage.localStorage.getItem('ranking');
         await waitFor(() => {
             expect(history.location.pathname).toBe('/ranking');
           });
