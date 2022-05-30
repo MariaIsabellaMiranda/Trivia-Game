@@ -13,7 +13,7 @@ class Ranking extends React.Component {
   //   };
   // }
 
-  renderQualquer = (play) => {
+  sortRanking = (play) => {
     const moveLeft = -1;
     const moveRight = 1;
     play.sort((a, b) => {
@@ -35,7 +35,7 @@ class Ranking extends React.Component {
 
   render() {
     const players = JSON.parse(localStorage.getItem('ranking'));
-    this.renderQualquer(players);
+    this.sortRanking(players);
     // const { rankingPlayers, sorted } = this.state;
     return (
       <div>
