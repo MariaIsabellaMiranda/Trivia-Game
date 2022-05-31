@@ -11,6 +11,8 @@ import {
 import Header from '../components/Header';
 import { updateAssertions, updateScore } from '../Redux/Actions';
 
+const basicBtn = 'basic-button';
+
 class Game extends React.Component {
   constructor() {
     super();
@@ -19,7 +21,7 @@ class Game extends React.Component {
       questionsAlternatives: [],
       code: '',
       questionResults: [],
-      classNames: ['', ''],
+      classNames: [basicBtn, basicBtn],
       isDisabled: false,
       timer: 30,
       timeRanOut: false,
@@ -123,7 +125,7 @@ class Game extends React.Component {
       this.setState((prevState) => ({
         indexQuestion: prevState.indexQuestion + 1,
         renderButtonNext: false,
-        classNames: ['', ''],
+        classNames: [basicBtn, basicBtn],
         isDisabled: false,
         timer: 30,
       }));
@@ -145,14 +147,9 @@ class Game extends React.Component {
 
   render() {
     const {
-      indexQuestion,
-      questionsAlternatives,
-      code,
-      questionResults,
-      classNames,
-      isDisabled,
-      timer,
-      timeRanOut,
+      indexQuestion, questionsAlternatives,
+      code, questionResults, classNames,
+      isDisabled, timer, timeRanOut,
       renderButtonNext,
     } = this.state;
     const number3 = 3;
@@ -160,28 +157,32 @@ class Game extends React.Component {
       <>
         <Header />
         { timeRanOut && this.stopTimer() }
-        <div>
+        <div className="game-background">
           { code === number3 ? (
             this.handleTokenInvalid()
           )
             : (
               <div>
                 {questionResults.length > 0 && (
-                  <div>
-                    <div data-testid="timer">{ timer }</div>
-                    <h2
-                      data-testid="question-category"
-                    >
-                      {questionResults[indexQuestion].category}
+                  <div className="game-container">
+                    <div data-testid="timer" className="timer-clock">{ timer }</div>
+                    <div className="question-info">
+                      <h2
+                        data-testid="question-category"
+                        className="qtn-category"
+                      >
+                        {questionResults[indexQuestion].category}
 
-                    </h2>
-                    <h3
-                      data-testid="question-text"
-                    >
-                      {questionResults[indexQuestion].question}
+                      </h2>
+                      <h3
+                        data-testid="question-text"
+                        className="qtn-text"
+                      >
+                        {questionResults[indexQuestion].question}
 
-                    </h3>
-                    <section data-testid="answer-options">
+                      </h3>
+                    </div>
+                    <section data-testid="answer-options" className="button-container">
                       { questionsAlternatives[indexQuestion].map((answers, index) => (
                         <button
                           className={
@@ -205,6 +206,7 @@ class Game extends React.Component {
                             <button
                               type="button"
                               data-testid="btn-next"
+                              className="next-button"
                               onClick={ this.nextQuestion }
                             >
                               Next
