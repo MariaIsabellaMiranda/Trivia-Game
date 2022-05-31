@@ -1,0 +1,84 @@
+@import url('https://fontlibrary.org//face/oxanium') ;
+
+@import url('https://fontlibrary.org//face/beon') ;
+
+.container-ranking {
+  align-items: center;
+  background: linear-gradient(to bottom, #4b546c, #40475f, #353b53, #2b2f46, #21233a);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-around;
+}
+
+.container-ranking h2 {
+  align-items: center;
+  color: white;
+  display: flex;
+  font-family: BeonRegular , monospace;
+  font-size: 2.1em;
+  margin-top: 40px;
+  text-shadow: 1px 1px
+    2px rgb(33, 35, 58) , 0 0 1em rgb(11, 255, 255) , 0 0 0.2em rgb(11, 255, 255);
+}
+
+.content-ranking {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  max-height: 80vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 20px;
+  width: 450px;
+}
+
+.player {
+  align-items: center;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.678);
+  border-radius: 20px;
+  box-shadow : 1px 1px
+    2px rgb(33, 35, 58) , 0 0 1em rgb(11, 255, 255) , 0 0 0.2em rgb(11, 255, 255);
+  display: flex;
+  font-family: OxaniumRegular , monospace;
+  height: 85px;
+  justify-content: space-evenly;
+  margin-bottom: 15px;
+  width: 90%;
+}
+
+.player img {
+  border-radius: 50px;
+  width: 65px;
+}
+
+.player h4, h5 {
+  font-size: 1.3em;
+}
+
+.ranking-div-player {
+  display: flex;
+  justify-content: space-evenly;
+  width: 40%;
+}
+
+.container-ranking button {
+  background-color: rgb(48, 113, 169);
+  border-radius: 15px;
+  box-shadow: 1px 1px 2px #21233abf , 0 0 1em #0bffff8f , 0 0 0.2em #0bffff86;
+  color: white;
+  cursor: pointer;
+  font-size: 1.4em;
+  height: 50px;
+  margin-bottom: 75px;
+  width: 105px;
+}
+
+.container-ranking button:hover {
+  background: rgb(66, 139, 202);
+  box-shadow: 1px 1px
+    2px rgb(33, 35, 58) , 0 0 1em rgb(11, 255, 255) , 0 0 0.2em rgb(11, 255, 255);
+  transition-duration: 0.5s;
+}
