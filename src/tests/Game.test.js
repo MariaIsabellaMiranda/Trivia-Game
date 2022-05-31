@@ -44,17 +44,27 @@ describe('Testa as funcionalidades da tela de Jogo', () => {
                 ]
              }
              ,
-
              {
-                "category": "Geography",
-                "type": "multiple",
-                "difficulty": "medium",
-                "question": "Which country has the abbreviation &quot;CH&quot;?",
-                "correct_answer": "Switzerland",
+               "category": "Geography",
+               "type": "multiple",
+               "difficulty": "medium",
+               "question": "Which country has the abbreviation &quot;CH&quot;?",
+               "correct_answer": "Brazil",
+               "incorrect_answers":[
+                 "China",
+                 "Canada",
+                 "No Country"
+               ]
+             }
+             ,
+             {
+                "category": "Entertainment: Film",
+                "type": "boolean",
+                "difficulty": "hard",
+                "question": "The colour of the pills in the Matrix were Blue and Yellow.",
+                "correct_answer": "False",
                 "incorrect_answers":[
-                  "China",
-                  "Canada",
-                  "No Country"
+                  "True",
                 ]
               }
           ] 
@@ -172,10 +182,30 @@ describe('Testa as funcionalidades da tela de Jogo', () => {
       userEvent.click(await screen.findByTestId('correct-answer'));
       userEvent.click(screen.getByRole('button', {name: /next/i}));
 
+      userEvent.click(await screen.findByTestId('correct-answer'));
+      userEvent.click(screen.getByRole('button', {name: /next/i}));
+
       expect(history.location.pathname).toBe('/feedback');
   });
-});
 
-// it('Verifica se há um timer', async () => {
-//   renderWithRouterAndRedux(<Game />);
-// });
+  it('Verifica se há um timer', async () => {
+    renderWithRouterAndRedux(<Game />);
+
+      const timer = await screen.findByTestId('timer');
+      expect(timer).toBeInTheDocument();
+  });
+
+  it('Verifica se a página é renderizada para o início quando o token está inválido', async () => {
+    jest.clearAllMocks();
+    jest.spyOn(global, 'fetch').mockResolvedValue({
+      json: jest.fn().mockResolvedValue({
+        "response_code":3,
+        "results":[]
+      })
+    });
+    const { history } = renderWithRouterAndRedux(<Game />);
+    expect(history.location.pathname).toBe('/')
+    const localStorageItem = localStorage.getItem('token');
+    expect(localStorageItem).toBeNull();
+  });
+});

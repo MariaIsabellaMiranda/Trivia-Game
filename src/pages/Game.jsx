@@ -168,7 +168,7 @@ class Game extends React.Component {
               <div>
                 {questionResults.length > 0 && (
                   <div>
-                    <div>{ timer }</div>
+                    <div data-testid="timer">{ timer }</div>
                     <h2
                       data-testid="question-category"
                     >
