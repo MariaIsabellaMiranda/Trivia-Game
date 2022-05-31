@@ -163,24 +163,15 @@ describe('Testa as funcionalidades da tela de Jogo', () => {
     expect(scoreValue.innerHTML).toBe("40"); //( 30 Timer + Easy(10 pontos) )
   });
 
-  // it('Verifica se após uma partida com 5 perguntas o jogador é redirecionado para a tela de feedback', async () => {
-  //   const {history, debug} = renderWithRouterAndRedux(<App/>,stateVersionOne,"/game");
+  it('Verifica se após uma partida o jogador é redirecionado para a tela de feedback', async () => {
+    const {history, debug} = renderWithRouterAndRedux(<App/>, stateVersionOne, "/game");
 
-  //     userEvent.click(await screen.findByTestId('correct-answer'));
-  //     userEvent.click(screen.getByRole('button', {name: /next/i}));
+      userEvent.click(await screen.findByTestId('correct-answer'));
+      userEvent.click(screen.getByRole('button', {name: /next/i}));
 
-  //     userEvent.click(await screen.findByTestId('correct-answer'));
-  //     userEvent.click(screen.getByRole('button', {name: /next/i}));
+      userEvent.click(await screen.findByTestId('correct-answer'));
+      userEvent.click(screen.getByRole('button', {name: /next/i}));
 
-  //     userEvent.click(await screen.findByTestId('correct-answer'));
-  //     userEvent.click(screen.getByRole('button', {name: /next/i}));
-
-  //     userEvent.click(await screen.findByTestId('correct-answer'));
-  //     userEvent.click(screen.getByRole('button', {name: /next/i}));
-
-  //     userEvent.click(await screen.findByTestId('correct-answer'));
-  //     userEvent.click(screen.getByRole('button', {name: /next/i}));
-
-  //     // expect(history.location.pathname).toBe('/feedback');
-  // });
+      expect(history.location.pathname).toBe('/feedback');
+  });
 });
