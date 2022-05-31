@@ -15,13 +15,12 @@ const defaultState = {
 }
 
 const stateVersionOne = {
-  player:{
-      name:'Ronaldinho Gaúcho',
-      gravatarEmail:'ronaldinho@bruxo.com',
-      score:0,
+  player: {
+    name:'Ronaldinho Gaúcho',
+    gravatarEmail:'ronaldinho@bruxo.com',
+    score:0,
   }
 }
-
 
 describe('Testa as funcionalidades da tela de Jogo', () => {
   let fetchMock;
@@ -43,7 +42,21 @@ describe('Testa as funcionalidades da tela de Jogo', () => {
                    "Your fists"
                 ]
              }
-          ]   
+             ,
+
+             {
+                "category": "Geography",
+                "type": "multiple",
+                "difficulty": "medium",
+                "question": "Which country has the abbreviation &quot;CH&quot;?",
+                "correct_answer": "Switzerland",
+                "incorrect_answers":[
+                  "China",
+                  "Canada",
+                  "No Country"
+                ]
+              }
+          ] 
       })
     })
   })
@@ -129,11 +142,23 @@ describe('Testa as funcionalidades da tela de Jogo', () => {
   //   jest.useFakeTimers();
   //   jest.advanceTimersByTime(30000);
   //   const alternativeButtons = await screen.findAllByRole('button');
-  //   const array = alternativeButtons[0].disabled;
-  //   console.log(array)
 
   //   alternativeButtons.forEach((button) => expect(button.disable).toBe('true'));
   // });
 
+  it('Verifica se ao clica em uma resposta, o botão next é renderizado', async () => {
+    renderWithRouterAndRedux(<Game />);
+    const alternativeButtons = await screen.findAllByRole('button');
+    userEvent.click(alternativeButtons[0]);
+    const nextButton = screen.getByRole('button', {name: /next/i});
+    expect(nextButton).toBeInTheDocument();
+  });
 
+  it('Verifica se ao clica na resposta correta, o score é mudado', async () => {
+    renderWithRouterAndRedux(<Game />);
+    const correctAnswer = await screen.findByTestId('correct-answer');
+    userEvent.click(correctAnswer);
+    const scoreValue = screen.getByTestId('header-score');
+    expect(scoreValue.innerHTML).toBe("40"); //( 30 Timer + Easy(10 pontos) )
+  });
 });
