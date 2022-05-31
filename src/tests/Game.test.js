@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { waitFor } from '@testing-library/react';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import Game from '../pages/Game';
+import Feedback from '../pages/Feedback';
 import App from '../App';
 
 const defaultState = {
@@ -125,28 +126,28 @@ describe('Testa as funcionalidades da tela de Jogo', () => {
     expect(wrongAnswer).toHaveLength(3);
   })
 
-  it('Verifica se ao renderizar as opções, elas não contem classe', async () => {
+  it('Verifica se ao renderizar as opções, elas não contêm classe', async () => {
     renderWithRouterAndRedux(<Game />);
     const alternativeButtons = await screen.findAllByRole('button');
     alternativeButtons.forEach((answer) => expect(answer.className).toBe(''));
   })
 
-  // it('Verificar se ao renderizar existem resposta habilitadas', async () => {
-  //   renderWithRouterAndRedux(<Game />);
-  //   const alternativeButtons = await screen.findAllByRole('button');
-  //   alternativeButtons.forEach((button) => expect(button).toHaveProperty('disabled',false))
-  // });
+  it('Verifica se ao renderizar existem respostas habilitadas', async () => {
+    renderWithRouterAndRedux(<Game />);
+    const alternativeButtons = await screen.findAllByRole('button');
+    alternativeButtons.forEach((button) => expect(button).not.toBeDisabled());
+  });
 
   // it('Verificar se após 30 segundos as resposta estão desabilitadas', async () => {
   //   renderWithRouterAndRedux(<Game />);
   //   jest.useFakeTimers();
-  //   jest.advanceTimersByTime(30000);
+  //   jest.advanceTimersByTime(32000);
   //   const alternativeButtons = await screen.findAllByRole('button');
 
-  //   alternativeButtons.forEach((button) => expect(button.disable).toBe('true'));
+  //   alternativeButtons.forEach((button) => expect(button).toBeDisabled());
   // });
 
-  it('Verifica se ao clica em uma resposta, o botão next é renderizado', async () => {
+  it('Verifica se ao clicar em uma resposta, o botão next é renderizado', async () => {
     renderWithRouterAndRedux(<Game />);
     const alternativeButtons = await screen.findAllByRole('button');
     userEvent.click(alternativeButtons[0]);
@@ -154,11 +155,32 @@ describe('Testa as funcionalidades da tela de Jogo', () => {
     expect(nextButton).toBeInTheDocument();
   });
 
-  it('Verifica se ao clica na resposta correta, o score é mudado', async () => {
+  it('Verifica se ao clicar na resposta correta, o score é mudado', async () => {
     renderWithRouterAndRedux(<Game />);
     const correctAnswer = await screen.findByTestId('correct-answer');
     userEvent.click(correctAnswer);
     const scoreValue = screen.getByTestId('header-score');
     expect(scoreValue.innerHTML).toBe("40"); //( 30 Timer + Easy(10 pontos) )
   });
+
+  // it('Verifica se após uma partida com 5 perguntas o jogador é redirecionado para a tela de feedback', async () => {
+  //   const {history, debug} = renderWithRouterAndRedux(<App/>,stateVersionOne,"/game");
+
+  //     userEvent.click(await screen.findByTestId('correct-answer'));
+  //     userEvent.click(screen.getByRole('button', {name: /next/i}));
+
+  //     userEvent.click(await screen.findByTestId('correct-answer'));
+  //     userEvent.click(screen.getByRole('button', {name: /next/i}));
+
+  //     userEvent.click(await screen.findByTestId('correct-answer'));
+  //     userEvent.click(screen.getByRole('button', {name: /next/i}));
+
+  //     userEvent.click(await screen.findByTestId('correct-answer'));
+  //     userEvent.click(screen.getByRole('button', {name: /next/i}));
+
+  //     userEvent.click(await screen.findByTestId('correct-answer'));
+  //     userEvent.click(screen.getByRole('button', {name: /next/i}));
+
+  //     // expect(history.location.pathname).toBe('/feedback');
+  // });
 });
