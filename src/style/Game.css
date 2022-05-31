@@ -1,3 +1,59 @@
+@import url('https://fontlibrary.org//face/oxanium') ;
+
+@import url('https://fontlibrary.org//face/retro-edge') ;
+
+.game-background {
+  background-color: rgb(14, 15, 31);
+  font-size: 18px;
+}
+
+.game-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  margin: auto;
+  padding: 10px;
+  width: 80%;
+}
+
+.timer-clock {
+  color: white;
+  font-size: 3em;
+  padding: 20px;
+  text-shadow: 1px 1px
+    2px rgb(199, 5, 102) , 0 0 1em rgb(247, 113, 206) , 0 0 0.3em rgb(215, 128, 255);
+}
+
+.question-info {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.qtn-category {
+  border: 3px double white;
+  font-family: RETROEDGERegular , monospace;
+  font-size: 1.4em;
+  margin: 10px;
+  padding: 10px;
+}
+
+.qtn-text {
+  font-family: OxaniumRegular , monospace;
+  font-size: 1.6em;
+  padding: 20px;
+}
+
+.button-container {
+  font-family: OxaniumRegular , monospace;
+}
+
+.basic-button {
+  border: 2px solid black;
+}
+
 .correct {
   background-color: rgb(6, 240, 15);
   border: 3px solid rgb(6, 240, 15);
@@ -6,4 +62,8 @@
 .wrong {
   background-color: red;
   border: 3px solid red;
+}
+
+.next-button {
+  font-family: RETROEDGERegular , monospace;
 }
