@@ -139,7 +139,7 @@ describe('Testa as funcionalidades da tela de Jogo', () => {
   it('Verifica se ao renderizar as opções, elas não contêm classe', async () => {
     renderWithRouterAndRedux(<Game />);
     const alternativeButtons = await screen.findAllByRole('button');
-    alternativeButtons.forEach((answer) => expect(answer.className).toBe(''));
+    alternativeButtons.forEach((answer) => expect(answer.className).toBe('basic-button'));
   })
 
   it('Verifica se ao renderizar existem respostas habilitadas', async () => {
