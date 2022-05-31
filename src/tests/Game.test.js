@@ -138,14 +138,14 @@ describe('Testa as funcionalidades da tela de Jogo', () => {
     alternativeButtons.forEach((button) => expect(button).not.toBeDisabled());
   });
 
-  // it('Verificar se após 30 segundos as resposta estão desabilitadas', async () => {
-  //   renderWithRouterAndRedux(<Game />);
-  //   jest.useFakeTimers();
-  //   jest.advanceTimersByTime(32000);
-  //   const alternativeButtons = await screen.findAllByRole('button');
+  it('Verificar se após 30 segundos as resposta estão desabilitadas', async () => {
+    renderWithRouterAndRedux(<Game />);
+    jest.useFakeTimers();
+    const alternativeButtons = await screen.findAllByRole('button');
+    jest.advanceTimersByTime(31000);
 
-  //   alternativeButtons.forEach((button) => expect(button).toBeDisabled());
-  // });
+    alternativeButtons.forEach((button) => expect(button).toBeDisabled());
+  });
 
   it('Verifica se ao clicar em uma resposta, o botão next é renderizado', async () => {
     renderWithRouterAndRedux(<Game />);
@@ -175,3 +175,7 @@ describe('Testa as funcionalidades da tela de Jogo', () => {
       expect(history.location.pathname).toBe('/feedback');
   });
 });
+
+// it('Verifica se há um timer', async () => {
+//   renderWithRouterAndRedux(<Game />);
+// });
