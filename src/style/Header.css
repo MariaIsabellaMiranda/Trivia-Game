@@ -1,0 +1,54 @@
+@import url('https://fontlibrary.org//face/cactron') ;
+
+@import url('https://fontlibrary.org//face/beon') ;
+
+* {
+  border: 0;
+  box-sizing: border-box;
+  font-size: 18px;
+  margin: 0;
+}
+
+.header {
+  background-color: rgb(33, 35, 58);
+  display: flex;
+  height: 130px;
+  justify-content: space-between;
+}
+
+.first-sector {
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: 80px;
+}
+
+.player-avatar {
+  box-shadow : 0 0 10px 1.5px rgb(33, 35, 58) , 0 0 25px 4px rgb(11, 255, 255);
+  margin: 40px;
+}
+
+.fake-labels {
+  color: white;
+  font-family: BeonRegular , monospace;
+  font-size: 2.1em;
+  margin-left: 10px;
+  text-shadow: 1px 1px
+    2px rgb(33, 35, 58) , 0 0 1em rgb(11, 255, 255) , 0 0 0.2em rgb(11, 255, 255);
+}
+
+.player-info {
+  align-items: center;
+  display: flex;
+  margin-right: 80px;
+}
+
+.player-name {
+  border: 1px solid black;
+  margin: 10px;
+}
+
+.player-score {
+  border: 1px solid black;
+  margin: 10px;
+}
