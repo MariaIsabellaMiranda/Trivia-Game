@@ -3,7 +3,6 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { restoreStore } from '../Redux/Actions';
 import '../style/Ranking.css';
-import Header from '../components/Header';
 
 class Ranking extends React.Component {
   sortRanking = (play) => {
@@ -39,7 +38,7 @@ class Ranking extends React.Component {
                   <img src={ picture } alt={ name } />
                   <h4 data-testid={ `player-name-${index}` }>{name}</h4>
                   <div className="ranking-div-player">
-                    <h5>Pontuação:</h5>
+                    <h5>Score:</h5>
                     <h4 data-testid={ `player-score-${index}` }>{score}</h4>
                   </div>
                 </div>
