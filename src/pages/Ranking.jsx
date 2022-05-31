@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { restoreStore } from '../Redux/Actions';
 import '../style/Ranking.css';
+import Header from '../components/Header';
 
 class Ranking extends React.Component {
   sortRanking = (play) => {
@@ -28,26 +29,31 @@ class Ranking extends React.Component {
     const players = JSON.parse(localStorage.getItem('ranking')) || [];
     this.sortRanking(players);
     return (
-      <div className="container-ranking">
-        <h2 data-testid="ranking-title">Ranking</h2>
-        <div className="content-ranking">
-          {
-            players.map(({ name, score, picture }, index) => (
-              <div key={ index } className="player">
-                <img src={ picture } alt={ name } />
-                <h4 data-testid={ `player-name-${index}` }>{name}</h4>
-                <h4 data-testid={ `player-score-${index}` }>{score}</h4>
-              </div>
-            ))
-          }
+      <div>
+        <div className="container-ranking">
+          <h2 data-testid="ranking-title">Ranking</h2>
+          <div className="content-ranking">
+            {
+              players.map(({ name, score, picture }, index) => (
+                <div key={ index } className="player">
+                  <img src={ picture } alt={ name } />
+                  <h4 data-testid={ `player-name-${index}` }>{name}</h4>
+                  <div className="ranking-div-player">
+                    <h5>Pontuação:</h5>
+                    <h4 data-testid={ `player-score-${index}` }>{score}</h4>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+          <button
+            type="button"
+            data-testid="btn-go-home"
+            onClick={ this.redirectToLogin }
+          >
+            Home
+          </button>
         </div>
-        <button
-          type="button"
-          data-testid="btn-go-home"
-          onClick={ this.redirectToLogin }
-        >
-          Home
-        </button>
       </div>
     );
   }

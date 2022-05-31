@@ -1,35 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap') ;
+
 .container-ranking {
   align-items: center;
-  border: 1px solid brown;
+  background-color: rgb(75, 84, 108);
   display: flex;
   flex-direction: column;
   height: 100vh;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .container-ranking h2 {
+  align-items: center;
+  color: white;
   display: flex;
-  flex-grow: 1;
+  font-family: Nunito , sans-serif;
+  font-size: 30px;
+  margin-top: 20px;
 }
 
 .content-ranking {
-  flex-grow: 2;
-}
-
-.content-ranking {
-  border: 1px solid yellow;
-  height: 300px;
-  width: 300px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  max-height: 80vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 20px;
+  width: 450px;
 }
 
 .player {
   align-items: center;
-  border: 1px solid red;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.678);
+  border-radius: 20px;
+  box-shadow : 0 0 10px 1.5px rgba(33, 35, 58, 0.76) , 0 0 10px 2px rgb(11, 255, 255);
   display: flex;
+  font-family: Nunito , sans-serif;
+  height: 75px;
   justify-content: space-evenly;
-  padding: 5px;
+  margin-bottom: 10px;
+  width: 90%;
 }
 
 .player img {
+  border-radius: 50px;
   width: 65px;
+}
+
+.ranking-div-player {
+  display: flex;
+  justify-content: space-evenly;
+  width: 40%;
+}
+
+.container-ranking button {
+  background-color: rgb(48, 113, 169);
+  border-radius: 15px;
+  color: white;
+  cursor: pointer;
+  height: 40px;
+  margin-bottom: 60px;
+  width: 85px;
+}
+
+.container-ranking button:hover {
+  background: rgb(66, 139, 202);
+  transition-duration: 0.2s;
 }
