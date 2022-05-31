@@ -51,10 +51,7 @@ describe('Testa as funcionalidades da tela de feedback', () =>{
         expect(headerImg).toBeInTheDocument();
         expect(headerImg.alt).toBe('Ronaldinho Gaúcho');
         expect(headerName).toBeInTheDocument();
-        expect(headerScore).toBeInTheDocument();
-
-
-        
+        expect(headerScore).toBeInTheDocument();       
     });     
      it('Verifica se tem um título "Feedback Page"',()=>{
         const {debug} = renderWithRouterAndRedux(<Feedback />);
