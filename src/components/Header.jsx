@@ -20,12 +20,12 @@ class Header extends React.Component {
           />
           <div className="player-info">
             <span className="fake-labels">Player:</span>
-            <h3 className="player-name" data-testid="header-player-name">{ name }</h3>
+            <h3 className="name-and-score" data-testid="header-player-name">{ name }</h3>
           </div>
         </div>
         <div className="player-info">
           <span className="fake-labels">Score:</span>
-          <h3 className="player-score" data-testid="header-score">{ score }</h3>
+          <h3 className="name-and-score" data-testid="header-score">{ score }</h3>
         </div>
       </div>
     );
