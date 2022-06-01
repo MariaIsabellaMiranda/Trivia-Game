@@ -147,10 +147,8 @@ class Game extends React.Component {
 
   render() {
     const {
-      indexQuestion, questionsAlternatives,
-      code, questionResults, classNames,
-      isDisabled, timer, timeRanOut,
-      renderButtonNext,
+      indexQuestion, questionsAlternatives, code, questionResults, classNames,
+      isDisabled, timer, timeRanOut, renderButtonNext,
     } = this.state;
     const number3 = 3;
     return (
@@ -182,7 +180,10 @@ class Game extends React.Component {
 
                       </h3>
                     </div>
-                    <section data-testid="answer-options" className="game-button-container">
+                    <section
+                      data-testid="answer-options"
+                      className="game-button-container"
+                    >
                       { questionsAlternatives[indexQuestion].map((answers, index) => (
                         <button
                           className={
