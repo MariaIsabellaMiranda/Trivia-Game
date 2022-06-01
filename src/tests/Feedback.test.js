@@ -55,7 +55,7 @@ describe('Testa as funcionalidades da tela de feedback', () =>{
     });     
      it('Verifica se tem um título "Feedback Page"',()=>{
         const {debug} = renderWithRouterAndRedux(<Feedback />);
-        const feedbackTitle =screen.getByRole('heading',{level:2,name:/feedback page/i});
+        const feedbackTitle =screen.getByRole('heading',{level:2,name:/feedback/i});
         expect(feedbackTitle).toBeInTheDocument();
         expect(feedbackTitle.innerHTML).not.toBe('game page');
     });

@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
+import '../style/Feedback.css';
 
 import { restoreStore } from '../Redux/Actions';
 
@@ -23,32 +24,48 @@ class Feedback extends React.Component {
     return (
       <div>
         <Header />
-        <h2>Feedback Page</h2>
-        {
-          assertions >= MIN_ASSERTIONS ? (
-            <p data-testid="feedback-text">Well Done!</p>
-          ) : (
-            <p data-testid="feedback-text">Could be better...</p>
-          )
-        }
-        <h4>Placar Final</h4>
-        <p data-testid="feedback-total-score">{score}</p>
-        <h4>Acertos</h4>
-        <p data-testid="feedback-total-question">{assertions}</p>
-        <button
-          type="button"
-          data-testid="btn-play-again"
-          onClick={ this.redirectToLogin }
-        >
-          Play Again
-        </button>
-        <button
-          type="button"
-          data-testid="btn-ranking"
-          onClick={ this.redirectToRanking }
-        >
-          Ranking
-        </button>
+        <div className="feedback-container">
+          <h2>Feedback</h2>
+          {
+            assertions >= MIN_ASSERTIONS ? (
+              <p data-testid="feedback-text" className="feedback-text">Well Done!</p>
+            ) : (
+              <p
+                data-testid="feedback-text"
+                className="feedback-text"
+              >
+                Could be better...
+
+              </p>
+            )
+          }
+          <div className="result-container">
+            <div className="placar">
+              <h4>Placar Final</h4>
+              <p data-testid="feedback-total-score">{score}</p>
+            </div>
+            <div className="assertions">
+              <h4>Acertos</h4>
+              <p data-testid="feedback-total-question">{assertions}</p>
+            </div>
+          </div>
+          <div className="button-container">
+            <button
+              type="button"
+              data-testid="btn-play-again"
+              onClick={ this.redirectToLogin }
+            >
+              Play Again
+            </button>
+            <button
+              type="button"
+              data-testid="btn-ranking"
+              onClick={ this.redirectToRanking }
+            >
+              Ranking
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
