@@ -1,32 +1,32 @@
 .login-main-box {
-    background: linear-gradient(to bottom, #4b546c, #40475f, #353b53, #2b2f46, #21233a);
-    align-content: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-  
-  .login-box {
-    align-content: center;
-    display: flex;
-    flex-direction: column;
-    height: 50%;
-    justify-content: center;
-    padding: 15%;
-    width: 50%;
-  }
-  
-  .login-input-name {
-    border: 2px solid black;
-    margin: 3%;
-    padding: 2%;
-  }
-  
-  .login-input-email {
-    border: 2px solid black;
-    margin: 3%;
-    padding: 2%;
-  } 
+  align-content: center;
+  background: linear-gradient(to bottom, #4b546c, #40475f, #353b53, #2b2f46, #21233a);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.login-box {
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  justify-content: center;
+  padding: 15%;
+  width: 50%;
+}
+
+.login-input-name {
+  border: 2px solid black;
+  margin: 3%;
+  padding: 2%;
+}
+
+.login-input-email {
+  border: 2px solid black;
+  margin: 3%;
+  padding: 2%;
+}
 
 .login-play-button {
   background-color: rgb(48, 113, 169);
