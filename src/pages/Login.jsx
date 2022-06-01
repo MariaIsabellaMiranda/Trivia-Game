@@ -3,6 +3,8 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { saveTokenToLocalStorage } from '../helpers/localStorageFunc';
 import { saveLoginInfo } from '../Redux/Actions';
+import '../style/Login.css';
+import logo from './trivia.png';
 
 class Login extends React.Component {
   constructor() {
@@ -35,44 +37,55 @@ class Login extends React.Component {
     const { name, mail } = this.state;
     const { history, savePlayerInfo } = this.props;
     return (
-      <section>
-        <label htmlFor="name">
-          <input
-            id="name"
-            type="text"
-            value={ name }
-            data-testid="input-player-name"
-            onChange={ this.handleInputChange }
-          />
-        </label>
-        <label htmlFor="mail">
-          <input
-            id="mail"
-            type="email"
-            value={ mail }
-            data-testid="input-gravatar-email"
-            onChange={ this.handleInputChange }
-          />
-        </label>
-        <button
-          type="button"
-          data-testid="btn-play"
-          disabled={ this.validateButton() }
-          onClick={ () => {
-            this.getGameTokenAndRedicect();
-            savePlayerInfo(name, mail);
-          } }
-        >
-          Play
+      <section className="login-main-box">
+        <section className="login-box">
+          <img src={ logo } alt="logo trivia" />
+          <label htmlFor="name">
+            Nome
+            <input
+              id="name"
+              className="login-input-name"
+              type="text"
+              value={ name }
+              data-testid="input-player-name"
+              onChange={ this.handleInputChange }
+            />
+          </label>
+          <label htmlFor="mail">
+            Email
+            <input
+              id="mail"
+              className="login-input-email"
+              type="email"
+              value={ mail }
+              data-testid="input-gravatar-email"
+              onChange={ this.handleInputChange }
+            />
+          </label>
+          <div className="login-button-box">
+            <button
+              type="button"
+              className="login-play-button"
+              data-testid="btn-play"
+              disabled={ this.validateButton() }
+              onClick={ () => {
+                this.getGameTokenAndRedicect();
+                savePlayerInfo(name, mail);
+              } }
+            >
+              Play
 
-        </button>
-        <button
-          type="button"
-          data-testid="btn-settings"
-          onClick={ () => { history.push('/settings'); } }
-        >
-          Settings
-        </button>
+            </button>
+            <button
+              type="button"
+              className="login-settings-button"
+              data-testid="btn-settings"
+              onClick={ () => { history.push('/settings'); } }
+            >
+              Settings
+            </button>
+          </div>
+        </section>
       </section>
     );
   }
