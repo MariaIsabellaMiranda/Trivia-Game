@@ -68,7 +68,6 @@
 
 .game-button-container button:disabled {
   background-color: rgb(59, 62, 97);
-  border: black;
   color: black;
 }
 

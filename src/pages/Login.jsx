@@ -45,6 +45,7 @@ class Login extends React.Component {
             <input
               id="name"
               className="login-input"
+              autoComplete="off"
               type="text"
               value={ name }
               data-testid="input-player-name"
@@ -56,6 +57,7 @@ class Login extends React.Component {
             <input
               id="mail"
               className="login-input"
+              autoComplete="off"
               type="email"
               value={ mail }
               data-testid="input-gravatar-email"
