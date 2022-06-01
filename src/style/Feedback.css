@@ -52,7 +52,7 @@
   background: linear-gradient(to bottom, #4b546c, #40475f, #353b53, #2b2f46, #21233a);
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - 130px);
   justify-content: space-evenly;
 }
 

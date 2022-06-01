@@ -182,7 +182,7 @@ class Game extends React.Component {
 
                       </h3>
                     </div>
-                    <section data-testid="answer-options" className="button-container">
+                    <section data-testid="answer-options" className="game-button-container">
                       { questionsAlternatives[indexQuestion].map((answers, index) => (
                         <button
                           className={

@@ -41,11 +41,11 @@ class Feedback extends React.Component {
           }
           <div className="result-container">
             <div className="placar">
-              <h4>Placar Final</h4>
+              <h4>Score</h4>
               <p data-testid="feedback-total-score">{score}</p>
             </div>
             <div className="assertions">
-              <h4>Acertos</h4>
+              <h4>Assertions</h4>
               <p data-testid="feedback-total-question">{assertions}</p>
             </div>
           </div>

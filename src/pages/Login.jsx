@@ -39,23 +39,23 @@ class Login extends React.Component {
     return (
       <section className="login-main-box">
         <section className="login-box">
-          <img src={ logo } alt="logo trivia" />
-          <label htmlFor="name">
+          <img className="trivia-logo" src={ logo } alt="logo trivia" />
+          <label className="login-label" htmlFor="name">
             Nome
             <input
               id="name"
-              className="login-input-name"
+              className="login-input"
               type="text"
               value={ name }
               data-testid="input-player-name"
               onChange={ this.handleInputChange }
             />
           </label>
-          <label htmlFor="mail">
+          <label className="login-label" htmlFor="mail">
             Email
             <input
               id="mail"
-              className="login-input-email"
+              className="login-input"
               type="email"
               value={ mail }
               data-testid="input-gravatar-email"
@@ -65,7 +65,7 @@ class Login extends React.Component {
           <div className="login-button-box">
             <button
               type="button"
-              className="login-play-button"
+              className="login-button"
               data-testid="btn-play"
               disabled={ this.validateButton() }
               onClick={ () => {
@@ -78,7 +78,7 @@ class Login extends React.Component {
             </button>
             <button
               type="button"
-              className="login-settings-button"
+              className="login-button"
               data-testid="btn-settings"
               onClick={ () => { history.push('/settings'); } }
             >
