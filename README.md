@@ -29,6 +29,7 @@ Nesta aplicação a pessoa usuária poderá:
 
 
 ## Como excutar o projeto
+ ⚠️**Importante**: É necessário ter o `node` na versão `16` instalado em sua máquina!
 
 - Clone o projeto para sua máquina local;
 - `cd` no diretório do projeto;
